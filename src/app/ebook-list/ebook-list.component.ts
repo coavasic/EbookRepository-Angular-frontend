@@ -7,6 +7,7 @@ import {saveAs} from "file-saver";
 import { SlicePipe } from '@angular/common';
 import { LanguageService } from '../language.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class EbookListComponent implements OnInit {
               private categoryService: CategoryService,
               private languageService: LanguageService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private userService: UserService) { }
 
 
 
@@ -72,6 +74,14 @@ export class EbookListComponent implements OnInit {
     
   }
 
+
+  doLogout(){
+
+    this.userService.logout().subscribe(data => {console.log("Logout success")});
+    localStorage.clear();
+    this.router.navigate(['/login']);
+
+  }
 
 
 

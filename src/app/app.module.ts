@@ -11,20 +11,33 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { EbookComponent } from './ebook/ebook.component';
 import { LanguageService } from './language.service';
 import { AppRoutingModule,routingComponent } from './app-routing.module';
+import { UserService } from './user.service';
+import { MyHttpInterceptor } from './my-http-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { LoginComponent } from './login/login.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponent
+    routingComponent,
+    SignUpComponent,
+    LoginComponent
     
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [EbooksService,CategoryService,LanguageService],
+  providers: [EbooksService,CategoryService,LanguageService,UserService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: MyHttpInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

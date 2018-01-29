@@ -6,6 +6,8 @@ import { RequestOptions , ResponseContentType,Headers } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { error } from 'selenium-webdriver';
+import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class EbooksService {

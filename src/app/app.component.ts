@@ -12,7 +12,7 @@ export class AppComponent implements OnInit{
   
   ngOnInit(){
 
-    this.router.navigate(['/ebooks']);
+    //this.router.navigate(['/categories']);
 
   }
   

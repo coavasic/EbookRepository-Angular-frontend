@@ -5,7 +5,7 @@ import { Category } from './model/category';
 @Injectable()
 export class CategoryService {
 
-  url="http://localhost:8080/api/categories/all";
+  url="http://localhost:8080/open/categories/all";
   constructor(private _http: HttpClient) { }
 
   getCategories(){

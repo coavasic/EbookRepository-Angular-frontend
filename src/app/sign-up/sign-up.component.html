@@ -1,0 +1,60 @@
+<div class="container">
+  <form #signUp="ngForm" (ngSubmit)="onSubmit(signUp.value)">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="firstname">First name:</label>
+        <input type="text" required name="firstName" class="form-control" id="firstname" placeholder="First name" ngModel>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="lastname">Last name:</label>
+        <input type="text" required name="lastName" class="form-control" id="lastname" placeholder="Last name" ngModel>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" required name="username" class="form-control" id="username" placeholder="Username" ngModel>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" required maxlength="15" minlength="4" name="password" class="form-control" id="password" placeholder="Password"
+        ngModel>
+    </div>
+
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <label for="type">Role</label>
+        <select required class="custom-select" name="role" id="type" ngModel>
+          <option value="user" selected>User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="category">Category</label>
+        <select required class="custom-select" name="categoryId" id="category" ngModel>
+          <option value="0" selected>All</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">
+            {{cat.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <br>
+
+
+    <div class="form-row text-center">
+      <div class="col-6">
+        <button type="submit" [disabled]="!signUp.form.valid" class="btn btn-primary">Sign up</button>
+      </div>
+      <div class="col-6">
+          <button class="btn btn-success" (click)="toLogin()">Login</button>
+        </div>
+    </div>
+
+
+
+  </form>
+
+</div>
