@@ -12,13 +12,13 @@ import { Router } from '@angular/router';
 @Injectable()
 export class EbooksService {
 
-  url = "http://localhost:8080/api/ebooks/all";
-  uploadUrl = "http://localhost:8080/api/ebooks/check"
+  url = "http://localhost:8080/open/ebooks";
+  uploadUrl = "http://localhost:8080/api/ebooks/upload"
   urlPost = "http://localhost:8080/api/ebooks/dodaj"
   urlDownload = "http://localhost:8080/api/ebooks/download/"
-  urlByCat= "http://localhost:8080/api/ebooks/bycategory/"
+  urlByCat= "http://localhost:8080/open/ebooks/bycategory/"
   urlDelete = "http://localhost:8080/api/ebooks/delete/";
-  urlBase= "http://localhost:8080/api/ebooks/";
+  urlBase= "http://localhost:8080/open/ebooks/";
 
 
   constructor(private _http: HttpClient) { }

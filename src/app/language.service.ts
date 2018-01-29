@@ -6,7 +6,7 @@ import { Langueage } from './model/language';
 export class LanguageService {
 
 
-  getAllUrl = "http://localhost:8080/api/languages/all";
+  getAllUrl = "http://localhost:8080/open/languages/all";
   constructor(private http: HttpClient) { }
 
   getAllLanguages(){

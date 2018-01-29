@@ -28,8 +28,8 @@
     <th *ngIf="!isCategoryFiltered">Category</th>
     <th>Langueage</th>
     <th>Download</th>
-    <th>Delete</th>
-    <th>Edit</th>
+    <th *ngIf="userLogged">Delete</th>
+    <th *ngIf="userLogged">Edit</th>
    </thead> 
 
    <tbody *ngFor="let ebook of ebooks">
@@ -41,8 +41,8 @@
         <td *ngIf="kategorijeStigle && !isCategoryFiltered">{{categories[ebook.categoryId - 1].name}}</td>
         <td *ngIf="jeziciStigli">{{languages[ebook.languageId - 1].languageName}}</td>
         <td><button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" (click)="download(ebook.fileName)">Download</button></td>
-        <td><button (click)="deleteBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Delete</button></td>
-        <td><button (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-info">Edit</button></td>
+        <td *ngIf="userLogged"><button (click)="deleteBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Delete</button></td>
+        <td *ngIf="userLogged"><button (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-info">Edit</button></td>
       </tr>
    </tbody>
 </table>

@@ -47,6 +47,7 @@ export class EbookListComponent implements OnInit {
   kategorijeStigle=false;
   jeziciStigli=false;
   isCategoryFiltered=false;
+  userLogged=false;
 
 
   selectedCategoryValue="all";
@@ -69,9 +70,26 @@ export class EbookListComponent implements OnInit {
     this.getCategories();
     this.getEbooks();
     this.getLanguages();
+    this.checkIfUserLoggedIn();
+  
 
 
-    
+  }
+
+  checkIfUserLoggedIn(){
+
+    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(currentUser==undefined){
+      this.userLogged=false;
+      console.log("Nije ulogovan");
+
+    }else{
+      this.userLogged=true;
+      console.log(currentUser);
+
+    }
+
+
   }
 
 
