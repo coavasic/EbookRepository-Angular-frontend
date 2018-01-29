@@ -13,7 +13,9 @@ intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> 
 
 
 console.log(req.url);
-if(req.url=="http://localhost:8080/login" || req.url=="http://localhost:8080/sign-up" || req.url=="http://localhost:8080/open/categories/all"){
+let string1: String[] = req.url.split("/");
+console.log(string1);
+if(string1.includes("login")|| string1.includes("open")||string1.includes("sign-up")){
    return next.handle(req);
 }
 
