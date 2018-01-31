@@ -13,7 +13,8 @@ const routes: Routes = [
     {path: 'categories/:id',component: EbookListComponent},
     {path: 'ebooks/:id',component: EbookComponent},
     {path: 'sign-up',component: SignUpComponent},
-    {path: 'login',component: LoginComponent}
+    {path: 'login',component: LoginComponent},
+    {path: '',redirectTo:'/ebooks',pathMatch:'full'}
 
 ];
 

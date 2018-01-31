@@ -1,38 +1,38 @@
 <div class="container">
 
 
-    <h2>Ebooks</h2>
+  <h2>Ebooks</h2>
 
 
 
-    <div class="form-group">
-      <label for="selectCat">Select category:</label>
+  <div class="form-group">
+    <label for="selectCat">Select category:</label>
 
-      <select class="form-control" id="selectCat" #selectElem (change)="selectSetCategory(selectElem.value)">
-        <option value="all">
-            Sve kategorije
-        </option>
-        <option *ngFor="let cat of categories" [value]="cat.id">
-            {{cat.name}}
-        </option>
+    <select class="form-control" id="selectCat" #selectElem (change)="selectSetCategory(selectElem.value)">
+      <option value="all">
+        Sve kategorije
+      </option>
+      <option *ngFor="let cat of categories" [value]="cat.id">
+        {{cat.name}}
+      </option>
     </select>
-    </div>
+  </div>
 
 
-<table class="table">
-  <thead class="thead-dark">
-    <th>Title</th>
-    <th>Author</th>
-    <th>Year</th>
-    <th>Keywords</th>
-    <th *ngIf="!isCategoryFiltered">Category</th>
-    <th>Langueage</th>
-    <th>Download</th>
-    <th *ngIf="userLogged">Delete</th>
-    <th *ngIf="userLogged">Edit</th>
-   </thead> 
+  <table class="table">
+    <thead class="thead-dark">
+      <th>Title</th>
+      <th>Author</th>
+      <th>Year</th>
+      <th>Keywords</th>
+      <th *ngIf="!isCategoryFiltered">Category</th>
+      <th>Langueage</th>
+      <th>Download</th>
+      <th *ngIf="userLogged">Delete</th>
+      <th *ngIf="userLogged">Edit</th>
+    </thead>
 
-   <tbody *ngFor="let ebook of ebooks">
+    <tbody *ngFor="let ebook of ebooks">
       <tr>
         <td (click)="goToEbook(ebook.id)">{{ebook.title}}</td>
         <td>{{ebook.author}}</td>
@@ -40,97 +40,112 @@
         <td>{{ebook.keywords}}</td>
         <td *ngIf="kategorijeStigle && !isCategoryFiltered">{{categories[ebook.categoryId - 1].name}}</td>
         <td *ngIf="jeziciStigli">{{languages[ebook.languageId - 1].languageName}}</td>
-        <td><button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" (click)="download(ebook.fileName)">Download</button></td>
-        <td *ngIf="userLogged"><button (click)="deleteBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Delete</button></td>
-        <td *ngIf="userLogged"><button (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-info">Edit</button></td>
+        <div *ngIf="(myCategoryId==ebook.categoryId || myCategoryId==0); then ifBlock;else elseBlock"></div>
+        <ng-template #ifBlock>
+          <td>
+            <button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" (click)="download(ebook.fileName)">Download</button>
+          </td>
+        </ng-template>
+        <ng-template #elseBlock>
+          <td>
+            <button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" (click)="goToLogin()">Login to download</button>
+          </td>
+        </ng-template>
+        <td *ngIf="userLogged">
+          <button [disabled]="!(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="deleteBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;"
+            class="btn btn-danger">Delete</button>
+        </td>
+        <td *ngIf="userLogged">
+          <button [disabled]="!(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;"
+            class="btn btn-info">Edit</button>
+        </td>
       </tr>
-   </tbody>
-</table>
-
-<button class="btn btn-danger" (click)="doLogout()">Logout</button>
-
-<div class="form-group">
-  <label for="file">Choose File</label>
-  <input type="file"
-         id="file" name="file"
-         accept="application/pdf"
-         (change)="handleFileInput($event.target.files)">
-</div>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="form-group">
+    <label for="file">Choose File</label>
+    <input type="file" id="file" name="file" accept="application/pdf" (change)="handleFileInput($event.target.files)">
+  </div>
 
   <button (click)="uploadFileToServer()">Upload</button>
 
   <!-- <h2>{{ebook.author}}</h2> -->
 
   <div *ngIf="isInputDivHidden">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+      </div>
+      <input #titleInput type="text" value={{ebook.title}} class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
     </div>
-    <input #titleInput type="text" value={{ebook.title}} class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Author</span>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Author</span>
+      </div>
+      <input type="text" #authorInput value={{ebook.author}} class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
     </div>
-    <input type="text" #authorInput value={{ebook.author}} class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Year</span>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Year</span>
+      </div>
+      <input pattern="[0-9]{10}" max="4" type="number" #yearInput value="{{ebook.publicationYear}}" class="form-control" aria-label="Default"
+        aria-describedby="inputGroup-sizing-default">
     </div>
-    <input pattern="[0-9]{10}" max="4" type="number" #yearInput value="{{ebook.publicationYear}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text"   id="inputGroup-sizing-default">Keywords</span>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Keywords</span>
+      </div>
+      <input type="text" #keywordsInput value="{{ebook.keywords}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
     </div>
-    <input type="text" #keywordsInput value="{{ebook.keywords}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div  class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Mime</span>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Mime</span>
+      </div>
+      <input type="text" #mimeInput value="{{ebook.mime}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
     </div>
-    <input type="text" #mimeInput value="{{ebook.mime}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div  class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Filename</span>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="inputGroup-sizing-default">Filename</span>
+      </div>
+      <input disabled type="text" #fileNameInput value="{{ebook.fileName}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
     </div>
-    <input disabled type="text" #fileNameInput value="{{ebook.fileName}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-  </div>
 
 
 
-<div *ngIf="!isCategoryFiltered" class="form-group">
-  <label for="sel1">Select category:</label>
-  <select class="form-control" id="sel1" #selectElem (change)="setCategory(selectElem.value)">
-    <option *ngFor="let cat of categories" [value]="cat.id">
-        {{cat.name}}
-    </option>
-</select>
-</div>
+    <div *ngIf="!isCategoryFiltered" class="form-group">
+      <label for="sel1">Select category:</label>
+      <select class="form-control" id="sel1" #selectElem (change)="setCategory(selectElem.value)">
+        <option *ngFor="let cat of categories" [value]="cat.id">
+          {{cat.name}}
+        </option>
+      </select>
+    </div>
 
-<div class="form-group">
-  <label for="selLan">Select language:</label>
-  <select class="form-control" id="selLan" #selectLang (change)="setLangueage(selectLang.value)">
-    <option *ngFor="let lang of languages" [value]="lang.id">
-        {{lang.languageName}}
-    </option>
-</select>
-</div>
- 
-  <!-- <div class="input-group mb-3">
+    <div class="form-group">
+      <label for="selLan">Select language:</label>
+      <select class="form-control" id="selLan" #selectLang (change)="setLangueage(selectLang.value)">
+        <option *ngFor="let lang of languages" [value]="lang.id">
+          {{lang.languageName}}
+        </option>
+      </select>
+    </div>
+
+    <!-- <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
     </div>
     <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
   </div> -->
 
-  <button (click)="ebookUpload(titleInput.value,authorInput.value,yearInput.value,keywordsInput.value,mimeInput.value,fileNameInput.value)" class="btn btn-success">Upload ebook</button>
+    <button (click)="ebookUpload(titleInput.value,authorInput.value,yearInput.value,keywordsInput.value,mimeInput.value,fileNameInput.value)"
+      class="btn btn-success">Upload ebook</button>
+
+  </div>
+
+
 
 </div>
-
-
-
-</div>
-

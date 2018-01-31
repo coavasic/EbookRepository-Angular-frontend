@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { UserPass } from '../model/UserPass';
 import { Router } from '@angular/router';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-category-list',
@@ -10,10 +11,16 @@ import { Router } from '@angular/router';
 })
 export class CategoryListComponent implements OnInit {
 
-  constructor(private userService: UserService,
+  constructor(private catService: CategoryService,
               private router: Router) { }
 
+  categories=[];
+
   ngOnInit() {
+    
+    this.catService.getCategories().subscribe(
+      data => this.categories=data
+    )
 
   }
 

@@ -12,6 +12,8 @@ export class UserService {
   urlLogin = "http://localhost:8080/login";
   urlLogout = "http://localhost:8080/logout";
   urlSignUp = "http://localhost:8080/sign-up";
+  urlGetMyCat= "http://localhost:8080/my-category";
+  urlMyRole= "http://localhost:8080/my-role"
 
 
   constructor(private _http:HttpClient) { }
@@ -35,6 +37,16 @@ export class UserService {
 
     return this._http.post(this.urlSignUp,signUpData);
 
+  }
+
+  getMyCatId(){
+
+    return this._http.get(this.urlGetMyCat);
+
+  }
+
+  getMyRole(){
+    return this._http.get(this.urlMyRole,{responseType:'text'});  
   }
 
 }

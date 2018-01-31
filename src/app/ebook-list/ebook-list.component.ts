@@ -42,7 +42,7 @@ export class EbookListComponent implements OnInit {
   mime: string;
   ebook: EbookDTO;
 
-
+  
 
   kategorijeStigle=false;
   jeziciStigli=false;
@@ -55,6 +55,9 @@ export class EbookListComponent implements OnInit {
 
   //defualt is first select options
   selectedLanguageId=1;
+
+  myCategoryId=-1;
+  isUserAdmin=false;
 
 
   
@@ -86,21 +89,33 @@ export class EbookListComponent implements OnInit {
     }else{
       this.userLogged=true;
       console.log(currentUser);
+      this.getMyCategoryId();
+      
 
     }
 
 
   }
 
-
-  doLogout(){
-
-    this.userService.logout().subscribe(data => {console.log("Logout success")});
-    localStorage.clear();
-    this.router.navigate(['/login']);
-
+  getMyCategoryId(){
+    this.userService.getMyCatId().subscribe(
+      success=> {
+        console.log("Locale string "+success.toLocaleString());
+        this.myCategoryId=parseInt(success.toLocaleString());
+      }
+    )
   }
 
+  getMyRole(){
+    
+  }
+
+
+
+
+  goToLogin(){
+    this.router.navigate(['/login'])
+  }
 
 
   getEbooks(){
