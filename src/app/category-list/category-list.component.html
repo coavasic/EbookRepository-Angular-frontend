@@ -6,6 +6,18 @@
 
     <br>
     <br>
-    <button class="btn btn-primary">Add category</button>
+    <button class="btn btn-primary" (click)="showInput()">Add category</button>
+    <br>
+    <br>
+    <div *ngIf="showAddInput">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Category name</span>
+            </div>
+            <input #catNameInput type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <br>
+        <button class="btn btn-info" (click)="addCat(catNameInput.value)">Dodaj</button>
+    </div>
 
 </div>

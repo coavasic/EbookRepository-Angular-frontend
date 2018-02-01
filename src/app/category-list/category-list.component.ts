@@ -15,12 +15,38 @@ export class CategoryListComponent implements OnInit {
               private router: Router) { }
 
   categories=[];
+  showAddInput=false;
 
   ngOnInit() {
     
+    this.getAllCats();
+
+  }
+
+  getAllCats(){
     this.catService.getCategories().subscribe(
       data => this.categories=data
     )
+  }
+
+  showInput(){
+    this.showAddInput=!this.showAddInput;
+  }
+
+  addCat(catName){
+
+    let cat={name: catName};
+    console.log(cat);
+    this.catService.addCategory(cat).subscribe(
+      success=>{
+
+        this.getAllCats();
+        this.showAddInput=false;
+
+
+      }
+    )
+    
 
   }
 
