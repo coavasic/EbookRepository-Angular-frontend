@@ -16,6 +16,9 @@ export class CategoryListComponent implements OnInit {
 
   categories=[];
   showAddInput=false;
+  showEditInput=false;
+  categoryId;
+  categoryName;
 
   ngOnInit() {
     
@@ -47,6 +50,29 @@ export class CategoryListComponent implements OnInit {
       }
     )
     
+
+  }
+
+  edit(id, name){
+    this.categoryId=id;
+    this.categoryName=name;
+    this.showEditInput=true;
+  }
+
+  cancelUpdate(){
+    this.showEditInput=false;
+    this.categoryName="";
+    this.categoryId=0;
+  }
+  
+  submitUpdate(newName){
+    let cat = {id: this.categoryId, name: newName}
+    this.catService.updateCategory(cat).subscribe(
+      success=>{
+        this.showEditInput=false;
+        this.getAllCats();
+      }
+    )
 
   }
 

@@ -7,6 +7,7 @@ export class CategoryService {
 
   url="http://localhost:8080/open/categories/all";
   urlAdd="http://localhost:8080/api/categories/add";
+  urlUpdate="http://localhost:8080/api/categories/add";
   constructor(private _http: HttpClient) { }
 
   getCategories(){
@@ -19,6 +20,10 @@ export class CategoryService {
 
     return this._http.post(this.urlAdd,category);
 
+  }
+
+  updateCategory(category){
+    return this._http.post(this.urlUpdate,category);
   }
 
 

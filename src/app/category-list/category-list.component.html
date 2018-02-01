@@ -1,9 +1,53 @@
 <div class="container">
+    <br>
     <h2>Categories</h2>
-    <ul class="list-group" *ngFor="let cat of categories">
-        <li class="list-group-item">{{cat.name}}</li>
-    </ul>
+    <br>
+    <div *ngIf="showEditInput">
+            <div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Category name</span>
+                    </div>
+                    <input #catEditInput type="text" value="{{categoryName}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                <br>
+    
+                <div class="form-row text-center">
+                        <div class="col-6">
+                            <button  (click)="submitUpdate(catEditInput.value)" class="btn btn-primary">Submit</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-danger" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
 
+    <br>
+    <table class="table">
+        <thead class="thead-dark">
+            <th class="col-md-8">Category name</th>
+            <th class="col-md-2">Edit</th>
+            <th class="col-md-2">Delete</th>
+        </thead>
+        <tbody *ngFor="let cat of categories">
+            <tr>
+                <td>
+                    {{cat.name}}
+                </td>
+                <td>
+                    <button (click)="edit(cat.id, cat.name)" style="display: block; text-align: center; margin: auto !important;"
+                      class="btn btn-danger">Edit</button>
+                  </td>
+                  <td>
+                    <button (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;"
+                      class="btn btn-info">Delete</button>
+                  </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    
     <br>
     <br>
     <button class="btn btn-primary" (click)="showInput()">Add category</button>
@@ -19,5 +63,10 @@
         <br>
         <button class="btn btn-info" (click)="addCat(catNameInput.value)">Dodaj</button>
     </div>
+
+    <br>
+    <br>
+
+
 
 </div>
