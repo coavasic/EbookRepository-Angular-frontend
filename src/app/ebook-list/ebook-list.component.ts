@@ -91,6 +91,7 @@ export class EbookListComponent implements OnInit {
       this.userLogged=true;
       console.log(currentUser);
       this.getMyCategoryId();
+      this.getMyRole();
       
 
     }
@@ -108,6 +109,18 @@ export class EbookListComponent implements OnInit {
   }
 
   getMyRole(){
+
+    this.userService.getMyRole().subscribe(
+      data => {
+       let role = data.toLocaleString();
+        console.log("ROLE  " +data);
+        if(data=="admin"){
+          this.isUserAdmin=true;
+          console.log("Jeste admin");
+
+        }}
+      
+    )
     
   }
 
