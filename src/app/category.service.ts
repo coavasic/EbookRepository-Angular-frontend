@@ -8,6 +8,7 @@ export class CategoryService {
   url="http://localhost:8080/open/categories/all";
   urlAdd="http://localhost:8080/api/categories/add";
   urlUpdate="http://localhost:8080/api/categories/add";
+  urlDelete="http://localhost:8080/api/categories/delete/"
   constructor(private _http: HttpClient) { }
 
   getCategories(){
@@ -24,6 +25,10 @@ export class CategoryService {
 
   updateCategory(category){
     return this._http.post(this.urlUpdate,category);
+  }
+
+  deleteCategory(id){
+    return this._http.get(this.urlDelete+id);
   }
 
 

@@ -38,7 +38,7 @@
         <td>{{ebook.author}}</td>
         <td>{{ebook.publicationYear}}</td>
         <td>{{ebook.keywords}}</td>
-        <td *ngIf="kategorijeStigle && !isCategoryFiltered">{{categories[ebook.categoryId - 1].name}}</td>
+        <td *ngIf="kategorijeStigle && !isCategoryFiltered">{{getCatName(ebook.categoryId)}}</td>
         <td *ngIf="jeziciStigli">{{languages[ebook.languageId - 1].languageName}}</td>
         <div *ngIf="(myCategoryId==ebook.categoryId || myCategoryId==0); then ifBlock;else elseBlock"></div>
         <ng-template #ifBlock>

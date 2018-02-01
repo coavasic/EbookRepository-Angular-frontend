@@ -76,5 +76,21 @@ export class CategoryListComponent implements OnInit {
 
   }
 
+  delete(id, name){
+    if(confirm("Are you sure to delete "+name)){
+
+      this.catService.deleteCategory(id).subscribe(
+        success=>{
+          this.getAllCats();
+        },
+        error=>{
+          alert("Nije moguce izbrisati izabranu kategoriju")
+        }
+      )
+      
+
+    }
+  }
+
 
 }

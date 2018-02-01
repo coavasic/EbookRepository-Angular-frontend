@@ -8,6 +8,7 @@ import { SlicePipe } from '@angular/common';
 import { LanguageService } from '../language.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -205,6 +206,18 @@ ebookUpload(title,author,year,keywords,mime,fileName){
   );
   
   
+}
+
+getCatName(id){
+  let catName = "";
+  for(let cat of this.categories){
+    if(cat.id == id){
+      catName=cat.name;
+    }
+  }
+
+  return catName;
+
 }
 
 
