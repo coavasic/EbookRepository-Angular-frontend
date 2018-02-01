@@ -9,13 +9,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: UserService,private router: Router) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
 
   }
 
-  onSubmit(loginInfo){
+  onSubmit(loginInfo) {
     console.log(loginInfo);
 
     this.userService.doLogin(loginInfo).subscribe(
@@ -34,13 +34,13 @@ export class LoginComponent implements OnInit {
 
 
       },
-      error=> alert("Wrong username or password")
+      error => alert("Wrong username or password")
     )
-    
+
   }
 
 
-  toSignUp(){
+  toSignUp() {
     this.router.navigate(['/sign-up']);
   }
 

@@ -7,38 +7,31 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class MyHttpInterceptor implements HttpInterceptor {
-constructor() { }
+    constructor() { }
 
-intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-
-console.log(req.url);
-let string1: String[] = req.url.split("/");
-console.log(string1);
-if(string1.includes("login")|| string1.includes("open")||string1.includes("sign-up")){
-   return next.handle(req);
-}
-
-console.log("intercepted request ... ");
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
-var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-var token1 = currentUser.token;
+        let string1: String[] = req.url.split("/");
 
-// Clone the request to add the new header.
-const authReq = req.clone({ headers: req.headers.set("Authorization", token1)});
+        if (string1.includes("login") || string1.includes("open") || string1.includes("sign-up")) {
+            return next.handle(req);
+        }
 
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        var token1 = currentUser.token;
 
-console.log("Sending request with new header now ...");
+        // Clone the request to add the new header.
+        const authReq = req.clone({ headers: req.headers.set("Authorization", token1) });
 
-//send the newly created request
-return next.handle(authReq)
-.catch((error, caught) => {
-//intercept the respons error and displace it to the console
-console.log("Error Occurred");
-console.log(error);
-//return the error to the method that called it
-return Observable.throw(error);
-}) as any;
-}
+        //send the newly created request
+        return next.handle(authReq)
+            .catch((error, caught) => {
+                //intercept the respons error and displace it to the console
+                console.log("Error Occurred");
+                console.log(error);
+                //return the error to the method that called it
+                return Observable.throw(error);
+            }) as any;
+    }
 }

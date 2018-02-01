@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable'
-import {HttpClient,HttpErrorResponse } from '@angular/common/http'
+import { Observable } from 'rxjs/Observable'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { EbookDTO } from './model/ebookDTO';
-import { RequestOptions , ResponseContentType,Headers } from '@angular/http';
+import { RequestOptions, ResponseContentType, Headers } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { error } from 'selenium-webdriver';
@@ -16,14 +16,14 @@ export class EbooksService {
   uploadUrl = "http://localhost:8080/api/ebooks/upload"
   urlPost = "http://localhost:8080/api/ebooks/dodaj"
   urlDownload = "http://localhost:8080/api/ebooks/download/"
-  urlByCat= "http://localhost:8080/open/ebooks/bycategory/"
+  urlByCat = "http://localhost:8080/open/ebooks/bycategory/"
   urlDelete = "http://localhost:8080/api/ebooks/delete/";
-  urlBase= "http://localhost:8080/open/ebooks/";
+  urlBase = "http://localhost:8080/open/ebooks/";
 
 
   constructor(private _http: HttpClient) { }
 
-  getAllEbooks(){
+  getAllEbooks() {
 
     return this._http.get<EbookDTO[]>(this.url);
 
@@ -35,43 +35,36 @@ export class EbooksService {
     formData.append('file', fileToUpload, fileToUpload.name);
     return this._http
       .post<EbookDTO>(endpoint, formData);
+  }
 
-     
-     
-}
+  postEbook(ebook) {
+    return this._http.post<EbookDTO>(this.urlPost, ebook)
+  }
 
-postEbook(ebook){
-  return this._http.post<EbookDTO>(this.urlPost,ebook)
-}
+  downloadBook(path) {
+    return this._http.get(this.urlDownload + path, { responseType: 'blob' })
 
-downloadBook(path){
-  return this._http.get(this.urlDownload+path,{responseType: 'blob'})
+  }
 
-}
+  getEbooksByCategory(id) {
+    return this._http.get<EbookDTO[]>(this.urlByCat + id);
+  }
 
-getEbooksByCategory(id){
-  return this._http.get<EbookDTO[]>(this.urlByCat+id);
-}
-
-deleteEbook(id){
-  return this._http.delete(this.urlDelete+id);
-}
+  deleteEbook(id) {
+    return this._http.delete(this.urlDelete + id);
+  }
 
 
-errorFunction( error: HttpErrorResponse ){
-			
-  return Observable.throw(error.message || "Server error");
+  errorFunction(error: HttpErrorResponse) {
+    return Observable.throw(error.message || "Server error");
+  }
 
-}
+  getById(id) {
+    return this._http.get<EbookDTO>(this.urlBase + id);
+  }
 
-getById(id){
-
-  return this._http.get<EbookDTO>(this.urlBase+id);
-
-}
-
-updateEbook(id, data){
-  return this._http.put(this.urlBase+"update/"+id,data);
-}
+  updateEbook(id, data) {
+    return this._http.put(this.urlBase + "update/" + id, data);
+  }
 
 }

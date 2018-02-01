@@ -12,85 +12,80 @@ import { CategoryService } from '../category.service';
 export class CategoryListComponent implements OnInit {
 
   constructor(private catService: CategoryService,
-              private router: Router) { }
+    private router: Router) { }
 
-  categories=[];
-  showAddInput=false;
-  showEditInput=false;
+  categories = [];
+  showAddInput = false;
+  showEditInput = false;
   categoryId;
   categoryName;
 
   ngOnInit() {
-    
+
     this.getAllCats();
 
   }
 
-  getAllCats(){
+  getAllCats() {
     this.catService.getCategories().subscribe(
-      data => this.categories=data
+
+      data => this.categories = data
+
     )
   }
 
-  showInput(){
-    this.showAddInput=!this.showAddInput;
+  showInput() {
+
+    this.showAddInput = !this.showAddInput;
+
   }
 
-  addCat(catName){
+  addCat(catName) {
 
-    let cat={name: catName};
+    let cat = { name: catName };
     console.log(cat);
     this.catService.addCategory(cat).subscribe(
-      success=>{
-
+      success => {
         this.getAllCats();
-        this.showAddInput=false;
-
-
+        this.showAddInput = false;
+      
       }
     )
-    
-
   }
 
-  edit(id, name){
-    this.categoryId=id;
-    this.categoryName=name;
-    this.showEditInput=true;
+  edit(id, name) {
+    this.categoryId = id;
+    this.categoryName = name;
+    this.showEditInput = true;
   }
 
-  cancelUpdate(){
-    this.showEditInput=false;
-    this.categoryName="";
-    this.categoryId=0;
+  cancelUpdate() {
+    this.showEditInput = false;
+    this.categoryName = "";
+    this.categoryId = 0;
   }
-  
-  submitUpdate(newName){
-    let cat = {id: this.categoryId, name: newName}
+
+  submitUpdate(newName) {
+    let cat = { id: this.categoryId, name: newName }
     this.catService.updateCategory(cat).subscribe(
-      success=>{
-        this.showEditInput=false;
+      success => {
+        this.showEditInput = false;
         this.getAllCats();
       }
     )
-
   }
 
-  delete(id, name){
-    if(confirm("Are you sure to delete "+name)){
+  delete(id, name) {
+    if (confirm("Are you sure to delete " + name)) {
 
       this.catService.deleteCategory(id).subscribe(
-        success=>{
+        success => {
           this.getAllCats();
         },
-        error=>{
+        error => {
           alert("Nije moguce izbrisati izabranu kategoriju")
         }
       )
-      
-
     }
   }
-
-
 }

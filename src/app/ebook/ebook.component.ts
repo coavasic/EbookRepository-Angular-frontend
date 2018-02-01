@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EbooksService } from '../ebooks.service';
 import { EbookDTO } from '../model/ebookDTO';
 
@@ -11,24 +11,24 @@ import { EbookDTO } from '../model/ebookDTO';
 export class EbookComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
-              private ebookService: EbooksService,
-              private router: Router) { }
+    private ebookService: EbooksService,
+    private router: Router) { }
 
   ebookId;
   ebook: EbookDTO;
-  author:string;
+  author: string;
   title: string;
   year: number;
   keywords: string;
   mime: string;
   selectedCategoryId;
   selectedLanguageId;
-  stiglo=false;
+  stiglo = false;
 
   ngOnInit() {
 
     this.ebookId = this.route.snapshot.paramMap.get('id');
-    
+
     this.ebookService.getById(this.ebookId).subscribe(
       data => {
 
@@ -42,22 +42,22 @@ export class EbookComponent implements OnInit {
 
   }
 
-  ebookUpdate(title,author,year,keywords,mime,fileName){
+  ebookUpdate(title, author, year, keywords, mime, fileName) {
 
-    let newEbook: EbookDTO = {id:"",title:title,author:author,publicationYear:year,keywords:keywords,mime:mime,fileName:fileName,categoryId:this.selectedCategoryId,languageId:this.selectedLanguageId}
+    let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, mime: mime, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
     console.log(newEbook);
-    this.ebookService.updateEbook(this.ebookId,newEbook).subscribe(
-      data => {      
+    this.ebookService.updateEbook(this.ebookId, newEbook).subscribe(
+      data => {
 
         this.router.navigate(['/ebooks']);
-  
+
       },
-      error =>{
+      error => {
         alert(error.message);
       }
     );
-    
-    
+
+
   }
 
 }

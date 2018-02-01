@@ -3,25 +3,25 @@
     <h2>Categories</h2>
     <br>
     <div *ngIf="showEditInput">
-            <div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Category name</span>
-                    </div>
-                    <input #catEditInput type="text" value="{{categoryName}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        <div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Category name</span>
                 </div>
-                <br>
-    
-                <div class="form-row text-center">
-                        <div class="col-6">
-                            <button  (click)="submitUpdate(catEditInput.value)" class="btn btn-primary">Submit</button>
-                        </div>
-                        <div class="col-6">
-                            <button class="btn btn-danger" (click)="cancelUpdate()">Cancel</button>
-                        </div>
-                    </div>
+                <input #catEditInput type="text" value="{{categoryName}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <br>
+
+            <div class="form-row text-center">
+                <div class="col-6">
+                    <button (click)="submitUpdate(catEditInput.value)" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-danger" (click)="cancelUpdate()">Cancel</button>
+                </div>
             </div>
         </div>
+    </div>
 
     <br>
     <table class="table">
@@ -36,27 +36,25 @@
                     {{cat.name}}
                 </td>
                 <td>
-                    <button (click)="edit(cat.id, cat.name)" style="display: block; text-align: center; margin: auto !important;"
-                      class="btn btn-danger">Edit</button>
-                  </td>
-                  <td>
-                    <button (click)="delete(cat.id,cat.name)" style="display: block; text-align: center; margin: auto !important;"
-                      class="btn btn-info">Delete</button>
-                  </td>
+                    <button (click)="edit(cat.id, cat.name)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Edit</button>
+                </td>
+                <td>
+                    <button (click)="delete(cat.id,cat.name)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-info">Delete</button>
+                </td>
             </tr>
         </tbody>
     </table>
-    
-    
+
     <br>
     <br>
+
     <button class="btn btn-primary" (click)="showInput()">Add category</button>
     <br>
     <br>
     <div *ngIf="showAddInput">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Category name</span>
+                <span class="input-group-text" id="inputGroup-sizing-default">Category name</span>
             </div>
             <input #catNameInput type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
         </div>
@@ -66,7 +64,5 @@
 
     <br>
     <br>
-
-
 
 </div>

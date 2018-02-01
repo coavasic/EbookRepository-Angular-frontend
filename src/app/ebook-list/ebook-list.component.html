@@ -1,9 +1,6 @@
 <div class="container">
 
-
   <h2>Ebooks</h2>
-
-
 
   <div class="form-group">
     <label for="selectCat">Select category:</label>
@@ -17,7 +14,6 @@
       </option>
     </select>
   </div>
-
 
   <table class="table">
     <thead class="thead-dark">
@@ -52,8 +48,8 @@
           </td>
         </ng-template>
         <td *ngIf="userLogged">
-          <button [disabled]="!isUserAdmin && !(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="deleteBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;"
-            class="btn btn-danger">Delete</button>
+          <button [disabled]="!isUserAdmin && !(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="deleteBook(ebook.id)"
+            style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Delete</button>
         </td>
         <td *ngIf="userLogged">
           <button [disabled]="!isUserAdmin && !(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;"
@@ -134,18 +130,10 @@
       </select>
     </div>
 
-    <!-- <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Default</span>
-    </div>
-    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-  </div> -->
-
     <button (click)="ebookUpload(titleInput.value,authorInput.value,yearInput.value,keywordsInput.value,mimeInput.value,fileNameInput.value)"
       class="btn btn-success">Upload ebook</button>
 
   </div>
-
 
 
 </div>

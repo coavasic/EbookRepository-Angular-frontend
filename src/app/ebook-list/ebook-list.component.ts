@@ -3,7 +3,7 @@ import { EbooksService } from '../ebooks.service';
 import { EbookDTO } from '../model/ebookDTO';
 import { CategoryService } from '../category.service';
 import { Category } from '../model/category';
-import {saveAs} from "file-saver";
+import { saveAs } from "file-saver";
 import { SlicePipe } from '@angular/common';
 import { LanguageService } from '../language.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,57 +17,41 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./ebook-list.component.css']
 })
 export class EbookListComponent implements OnInit {
-  isInputDivHidden=false;
-  isDisabled=true;
+  isInputDivHidden = false;
+  isDisabled = true;
   constructor(private ebookService: EbooksService,
-              private categoryService: CategoryService,
-              private languageService: LanguageService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private userService: UserService) { }
+    private categoryService: CategoryService,
+    private languageService: LanguageService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService) { }
 
 
 
   // creating initial list of objests
-  
+
   ebooks = [];
-  categories=[];
-  languages=[];
+  categories = [];
+  languages = [];
 
 
   fileToUpload: File = null;
-  author:string;
+  author: string;
   title: string;
   year: number;
   keywords: string;
   mime: string;
   ebook: EbookDTO;
-
-  
-
-  kategorijeStigle=false;
-  jeziciStigli=false;
-  isCategoryFiltered=false;
-  userLogged=false;
-
-
-  selectedCategoryValue="all";
-  selectedCategoryId=1;
-
+  kategorijeStigle = false;
+  jeziciStigli = false;
+  isCategoryFiltered = false;
+  userLogged = false;
+  selectedCategoryValue = "all";
+  selectedCategoryId = 1;
   //defualt is first select options
-  selectedLanguageId=1;
-
-  myCategoryId=-1;
-  isUserAdmin=false;
-
-
-  
-  
-   
-
-
-
-
+  selectedLanguageId = 1;
+  myCategoryId = -1;
+  isUserAdmin = false;
 
   ngOnInit() {
 
@@ -75,64 +59,55 @@ export class EbookListComponent implements OnInit {
     this.getEbooks();
     this.getLanguages();
     this.checkIfUserLoggedIn();
-  
-
 
   }
 
-  checkIfUserLoggedIn(){
+  checkIfUserLoggedIn() {
 
     var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if(currentUser==undefined){
-      this.userLogged=false;
+    if (currentUser == undefined) {
+      this.userLogged = false;
       console.log("Nije ulogovan");
 
-    }else{
-      this.userLogged=true;
+    } else {
+      this.userLogged = true;
       console.log(currentUser);
       this.getMyCategoryId();
       this.getMyRole();
-      
-
     }
-
-
   }
 
-  getMyCategoryId(){
+  getMyCategoryId() {
     this.userService.getMyCatId().subscribe(
-      success=> {
-        console.log("Locale string "+success.toLocaleString());
-        this.myCategoryId=parseInt(success.toLocaleString());
+      success => {
+        console.log("Locale string " + success.toLocaleString());
+        this.myCategoryId = parseInt(success.toLocaleString());
       }
     )
   }
 
-  getMyRole(){
+  getMyRole() {
 
     this.userService.getMyRole().subscribe(
       data => {
-       let role = data.toLocaleString();
-        console.log("ROLE  " +data);
-        if(data=="admin"){
-          this.isUserAdmin=true;
+        let role = data.toLocaleString();
+        console.log("ROLE  " + data);
+        if (data == "admin") {
+          this.isUserAdmin = true;
           console.log("Jeste admin");
-
-        }}
-      
+        }
+      }
     )
-    
   }
 
 
 
 
-  goToLogin(){
+  goToLogin() {
     this.router.navigate(['/login'])
   }
 
-
-  getEbooks(){
+  getEbooks() {
     this.ebookService.getAllEbooks().subscribe(
 
       data => {
@@ -141,179 +116,159 @@ export class EbookListComponent implements OnInit {
     )
   }
 
-  getByCategory(id){
+  getByCategory(id) {
 
     this.ebookService.getEbooksByCategory(id).subscribe(
       data => {
         this.ebooks = data;
         console.log(data);
       },
-      error=> {
+      error => {
         console.log(error.message);
       }
     )
-
   }
 
-  getCategories(){
+  getCategories() {
+
     this.categoryService.getCategories().subscribe(
       data => {
         this.categories = data;
         console.log(this.categories);
-        this.kategorijeStigle=true;
+        this.kategorijeStigle = true;
       }
     )
   }
 
-  getLanguages(){
+  getLanguages() {
 
     this.languageService.getAllLanguages().subscribe(
       data => {
         this.languages = data;
-        this.jeziciStigli=true;
+        this.jeziciStigli = true;
       }
     )
-
   }
 
   handleFileInput(files: FileList) {
+
     this.fileToUpload = files.item(0);
-}
-
-uploadFileToServer(){
-
-  
-  
-
-  this.ebookService.postFile(this.fileToUpload).subscribe(data =>{
-
-    this.ebook=data;
-    this.isInputDivHidden=true;
-    
-
-  },
-  error=>{
-    alert("Izabrani fajl nije validan!");
   }
-)
-}
 
-ebookUpload(title,author,year,keywords,mime,fileName){
+  uploadFileToServer() {
 
-  let newEbook: EbookDTO = {id:"",title:title,author:author,publicationYear:year,keywords:keywords,mime:mime,fileName:fileName,categoryId:this.selectedCategoryId,languageId:this.selectedLanguageId}
-  console.log(newEbook);
-  this.ebookService.postEbook(newEbook).subscribe(
-    data => {      
-
-      this.isInputDivHidden=false;
-
-      if(this.isCategoryFiltered){
-        this.getByCategory(this.selectedCategoryId)
+    this.ebookService.postFile(this.fileToUpload).subscribe(data => {
+      this.ebook = data;
+      this.isInputDivHidden = true;
+    },
+      error => {
+        alert("Izabrani fajl nije validan!");
       }
-      this.getEbooks();
-
-    },
-    error =>{
-      alert(error.message);
-    }
-  );
-  
-  
-}
-
-getCatName(id){
-  let catName = "";
-  for(let cat of this.categories){
-    if(cat.id == id){
-      catName=cat.name;
-    }
+    )
   }
 
-  return catName;
+  ebookUpload(title, author, year, keywords, mime, fileName) {
 
-}
+    let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, mime: mime, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
+    console.log(newEbook);
+    this.ebookService.postEbook(newEbook).subscribe(
+      data => {
 
+        this.isInputDivHidden = false;
 
-selectSetCategory(value){
-  
+        if (this.isCategoryFiltered) {
+          this.getByCategory(this.selectedCategoryId)
+        }
+        this.getEbooks();
 
-  if(value==="all"){
+      },
+      error => {
+        alert(error.message);
+      }
+    );
 
-    this.isCategoryFiltered=false;
-    this.selectedCategoryId=1;
-    this.getEbooks();
-
-  }else{
-
-    this.selectedCategoryId=value;
-    this.isCategoryFiltered=true;
-    this.getByCategory(value);
 
   }
 
+  getCatName(id) {
 
-}
-
-//handle (change) event of select element to have selected object id
-setCategory(id){
-
-  this.selectedCategoryId = id;  
-
-}
-
-setLangueage(id){
-  this.selectedLanguageId=id;
-}
-
-download(fileName){
-
-  fileName.slice
-
-  this.ebookService.downloadBook(fileName).subscribe(
-    data => {
-      this.downloadFile(data,fileName);
-      
-    },
-    error =>{
-
-      alert(error.message);
-
-    }
-
-  )
-
-}
-
-downloadFile(data,fileName){
-  var blob = new Blob([data], { type: 'application/pdf' });
-  saveAs(blob,fileName);
-  
-}
-
-deleteBook(id){
-
-  this.ebookService.deleteEbook(id).subscribe(
-    data=> {
-      if(!this.isCategoryFiltered){
-        console.log("kurac");
-      this.getEbooks();
-      this.selectedCategoryId=1;
-      }else {
-      this.getByCategory(this.selectedCategoryId);
+    let catName = "";
+    for (let cat of this.categories) {
+      if (cat.id == id) {
+        catName = cat.name;
       }
     }
-
-  )
-
-}
+    return catName;
+  }
 
 
-goToEBook(id){
-  console.log(id);
-  this.router.navigate(['/ebooks',id]);
+  selectSetCategory(value) {
 
-}
+    if (value === "all") {
+
+      this.isCategoryFiltered = false;
+      this.selectedCategoryId = 1;
+      this.getEbooks();
+
+    } else {
+
+      this.selectedCategoryId = value;
+      this.isCategoryFiltered = true;
+      this.getByCategory(value);
+    }
+  }
+
+  //handle (change) event of select element to have selected object id
+  setCategory(id) {
+
+    this.selectedCategoryId = id;
+  }
+
+  setLangueage(id) {
+
+    this.selectedLanguageId = id;
+  }
+
+  download(fileName) {
+
+    fileName.slice
+    this.ebookService.downloadBook(fileName).subscribe(
+      data => {
+        this.downloadFile(data, fileName);
+      },
+      error => {
+        alert(error.message);
+      }
+    )
+  }
+
+  downloadFile(data, fileName) {
+
+    var blob = new Blob([data], { type: 'application/pdf' });
+    saveAs(blob, fileName);
+  }
+
+  deleteBook(id) {
+
+    this.ebookService.deleteEbook(id).subscribe(
+      data => {
+        if (!this.isCategoryFiltered) {
+          console.log("kurac");
+          this.getEbooks();
+          this.selectedCategoryId = 1;
+        } else {
+          this.getByCategory(this.selectedCategoryId);
+        }
+      }
+    )
+  }
 
 
+  goToEBook(id) {
 
+    console.log(id);
+    this.router.navigate(['/ebooks', id]);
+  }
+
+  
 }

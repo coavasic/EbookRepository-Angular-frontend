@@ -9,7 +9,7 @@ export class LanguageService {
   getAllUrl = "http://localhost:8080/open/languages/all";
   constructor(private http: HttpClient) { }
 
-  getAllLanguages(){
+  getAllLanguages() {
     return this.http.get<Langueage[]>(this.getAllUrl);
   }
 

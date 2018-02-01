@@ -10,36 +10,33 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private userService: UserService,private catService: CategoryService,
-              private router: Router) { }
+  constructor(private userService: UserService, private catService: CategoryService,
+    private router: Router) { }
 
-  categories=[];
+  categories = [];
 
   ngOnInit() {
 
     this.catService.getCategories().subscribe(
-      success=>{
-        this.categories=success;
+      success => {
+        this.categories = success;
       }
     )
-
   }
 
-  onSubmit(user){
+  onSubmit(user) {
     console.log(user)
     this.userService.signUp(user).subscribe(
-      success=> {
+      success => {
         alert("OCE");
         this.router.navigate(['/login']);
       }
     )
   }
 
-  toLogin(){
+  toLogin() {
     this.router.navigate(['/login'])
   }
-
-
 
 
 }
