@@ -17,7 +17,7 @@
           </td>
           <td>{{user.role}}</td>
           <td>
-              <button (click)="delete(cat.id,cat.name)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-info">Promote</button>
+              <button [disabled]="user.role=='admin'" (click)="promote(user.username)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-info">Promote</button>
           </td>
           <td>
               <button (click)="edit(cat.id, cat.name)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Edit</button>

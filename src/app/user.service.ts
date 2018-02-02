@@ -45,4 +45,8 @@ export class UserService {
     return this._http.get<User[]>("http://localhost:8080/api/users");
   }
 
+  promote(username){
+    return this._http.get("http://localhost:8080/api/promote/"+username);
+  }
+
 }

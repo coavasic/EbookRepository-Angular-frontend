@@ -16,10 +16,20 @@ export class UserListComponent implements OnInit {
   
   }
 
-  getUsers(){
+  getUsers() {
     this.userService.getAllUsers().subscribe(
       users=> this.users = users
     )
+  }
+
+  promote(username) {
+    if(confirm("Are you sure?")){
+      this.userService.promote(username).subscribe(
+        success=>{
+          this.getUsers();
+        }
+      )
+    }
   }
 
 
