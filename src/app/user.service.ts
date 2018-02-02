@@ -5,6 +5,7 @@ import { RequestOptions, ResponseContentType, Headers } from '@angular/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { HttpHeaders } from '@angular/common/http';
+import { User } from './model/User';
 
 @Injectable()
 export class UserService {
@@ -38,6 +39,10 @@ export class UserService {
 
   getMyRole() {
     return this._http.get(this.urlMyRole, { responseType: 'text' });
+  }
+
+  getAllUsers(){
+    return this._http.get<User[]>("http://localhost:8080/api/users");
   }
 
 }

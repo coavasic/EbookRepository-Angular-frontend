@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
+import { UserListComponent } from './user-list/user-list.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {FormsModule} from '@angular/forms';
     AppComponent,
     routingComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    UserListComponent
     
   ],
   imports: [

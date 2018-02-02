@@ -12,13 +12,13 @@ import { Router } from '@angular/router';
 @Injectable()
 export class EbooksService {
 
-  url = "http://localhost:8080/open/ebooks";
+  url = "http://localhost:8080/open/ebooks/";
   uploadUrl = "http://localhost:8080/api/ebooks/upload"
   urlPost = "http://localhost:8080/api/ebooks/dodaj"
   urlDownload = "http://localhost:8080/api/ebooks/download/"
   urlByCat = "http://localhost:8080/open/ebooks/bycategory/"
   urlDelete = "http://localhost:8080/api/ebooks/delete/";
-  urlBase = "http://localhost:8080/open/ebooks/";
+  urlBase = "http://localhost:8080/api/ebooks/";
 
 
   constructor(private _http: HttpClient) { }
@@ -51,7 +51,7 @@ export class EbooksService {
   }
 
   deleteEbook(id) {
-    return this._http.delete(this.urlDelete + id);
+    return this._http.get(this.urlDelete + id);
   }
 
 
@@ -60,11 +60,11 @@ export class EbooksService {
   }
 
   getById(id) {
-    return this._http.get<EbookDTO>(this.urlBase + id);
+    return this._http.get<EbookDTO>(this.url + id);
   }
-
+  
   updateEbook(id, data) {
-    return this._http.put(this.urlBase + "update/" + id, data);
+    return this._http.post(this.urlBase + "update/" + id, data);
   }
 
 }

@@ -42,9 +42,9 @@ export class EbookComponent implements OnInit {
 
   }
 
-  ebookUpdate(title, author, year, keywords, mime, fileName) {
+  ebookUpdate(title, author, year, keywords,fileName) {
 
-    let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, mime: mime, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
+    let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
     console.log(newEbook);
     this.ebookService.updateEbook(this.ebookId, newEbook).subscribe(
       data => {

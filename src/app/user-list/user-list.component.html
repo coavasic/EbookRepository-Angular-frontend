@@ -1,0 +1,32 @@
+<div class="container">
+  <br>
+  <table class="table">
+    <thead class="thead-dark">
+      <th class="col-md-6">Username</th>
+      <th class="col-md-3">Role</th>
+      <th class="col-md-1">Promote</th>
+      <th class="col-md-1">Edit</th>
+      <th class="col-md-1">Delete</th>
+      <!-- <th class="col-md-2">Edit</th>
+      <th class="col-md-2">Delete</th> -->
+    </thead>
+    <tbody *ngFor="let user of users">
+      <tr>
+          <td>
+             {{user.username}}
+          </td>
+          <td>{{user.role}}</td>
+          <td>
+              <button (click)="delete(cat.id,cat.name)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-info">Promote</button>
+          </td>
+          <td>
+              <button (click)="edit(cat.id, cat.name)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Edit</button>
+          </td>
+          <td>
+              <button (click)="delete(cat.id,cat.name)" style="display: block; text-align: center; margin: auto !important;" class="btn btn-info">Delete</button>
+          </td>
+          
+      </tr>
+  </tbody>
+  </table>
+</div>

@@ -5,7 +5,6 @@ export interface EbookDTO {
     author: string,
     keywords: string,
     publicationYear: number,
-    mime: string,
     fileName: string,
     categoryId: number,
     languageId: number

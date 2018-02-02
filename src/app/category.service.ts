@@ -7,7 +7,7 @@ export class CategoryService {
 
   url = "http://localhost:8080/open/categories/all";
   urlAdd = "http://localhost:8080/api/categories/add";
-  urlUpdate = "http://localhost:8080/api/categories/add";
+  urlUpdate = "http://localhost:8080/api/categories/edit";
   urlDelete = "http://localhost:8080/api/categories/delete/"
   constructor(private _http: HttpClient) { }
 
