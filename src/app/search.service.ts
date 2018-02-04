@@ -7,9 +7,9 @@ export class SearchService {
 
   constructor(private _http: HttpClient) { }
 
-  searh(searhItem){
+  searh(searchType,searhItem){
 
-    return  this._http.post<EbookDTO[]>("http://localhost:8080/open/search/queryParser",searhItem);
+    return  this._http.post<EbookDTO[]>("http://localhost:8080/open/search/"+ searchType,searhItem);
 
   }
 

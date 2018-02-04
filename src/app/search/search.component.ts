@@ -35,10 +35,12 @@ export class SearchComponent implements OnInit {
     this.checkIfUserLoggedIn();
   }
 
-  search(value){
+  search(value,type,field){
 
-    let searchItem = {"value":value}
-    this.searchService.searh(searchItem).subscribe(
+    console.log(value + type + field)
+
+    let searchItem = {"field":field,"value":value}
+    this.searchService.searh(type,searchItem).subscribe(
       success => {
         this.ebooks = success;
       }
