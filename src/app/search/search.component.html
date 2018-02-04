@@ -1,0 +1,58 @@
+<div class="container">
+
+  <br>
+  <br>
+  <div class="input-group">
+
+    <input type="text" class="form-control" #searchInput placeholder="Search for...">
+    <span class="input-group-btn">
+      <button (click)="search(searchInput.value)" class="btn btn-secondary" type="button">Go!</button>
+    </span>
+  </div>
+
+
+  <br>
+  <br>
+  <table class="table">
+    <thead class="thead-dark">
+      <th>Title</th>
+      <th>Author</th>
+      <th>Year</th>
+      <th>Keywords</th>
+      <th *ngIf="!isCategoryFiltered">Category</th>
+      <th>Langueage</th>
+      <th>Download</th>
+      <th *ngIf="userLogged">Delete</th>
+      <th *ngIf="userLogged">Edit</th>
+    </thead>
+    <tbody *ngFor="let ebook of ebooks">
+      <tr>
+        <td (click)="goToEbook(ebook.id)">{{ebook.title}}</td>
+        <td>{{ebook.author}}</td>
+        <td>{{ebook.publicationYear}}</td>
+        <td>{{ebook.keywords}}</td>
+        <td *ngIf="kategorijeStigle && !isCategoryFiltered">{{getCatName(ebook.categoryId)}}</td>
+        <td *ngIf="jeziciStigli">{{languages[ebook.languageId - 1].languageName}}</td>
+        <div *ngIf="isUserAdmin || (myCategoryId==ebook.categoryId || myCategoryId==0); then ifBlock;else elseBlock"></div>
+        <ng-template #ifBlock>
+          <td>
+            <button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" (click)="download(ebook.fileName)">Download</button>
+          </td>
+        </ng-template>
+        <ng-template #elseBlock>
+          <td>
+            <button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" (click)="goToLogin()">Login to download</button>
+          </td>
+        </ng-template>
+        <td *ngIf="userLogged">
+          <button [disabled]="!isUserAdmin && !(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="deleteBook(ebook.id)"
+            style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Delete</button>
+        </td>
+        <td *ngIf="userLogged">
+          <button [disabled]="!isUserAdmin && !(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;"
+            class="btn btn-info">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

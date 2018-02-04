@@ -167,10 +167,8 @@ export class EbookListComponent implements OnInit {
     )
   }
 
-  ebookUpload(title, author, year, keywords, mime, fileName) {
-
+  ebookUpload(title, author, year, keywords, fileName) {
     let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
-    console.log(newEbook);
     this.ebookService.postEbook(newEbook).subscribe(
       data => {
 

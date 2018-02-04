@@ -6,6 +6,7 @@ import { EbookComponent } from './ebook/ebook.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
 
@@ -16,7 +17,8 @@ const routes: Routes = [
     {path: 'sign-up',component: SignUpComponent},
     {path: 'login',component: LoginComponent},
     {path: '',redirectTo:'/ebooks',pathMatch:'full'},
-    {path: 'users',component: UserListComponent}
+    {path: 'users',component: UserListComponent},
+    {path: 'search',component:SearchComponent}
 
 ];
 
@@ -30,5 +32,6 @@ export const routingComponent =[EbookListComponent,
                                 EbookComponent,
                                 SignUpComponent,
                                 LoginComponent,
-                                UserListComponent]
+                                UserListComponent,
+                                SearchComponent]
 

@@ -16,8 +16,10 @@ import { MyHttpInterceptor } from './my-http-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginComponent } from './login/login.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list/user-list.component';
+import { SearchComponent } from './search/search.component';
+import { SearchService } from './search.service';
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { UserListComponent } from './user-list/user-list.component';
     routingComponent,
     SignUpComponent,
     LoginComponent,
-    UserListComponent
+    UserListComponent,
+    SearchComponent
     
   ],
   imports: [
@@ -35,7 +38,7 @@ import { UserListComponent } from './user-list/user-list.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [EbooksService,CategoryService,LanguageService,UserService,{
+  providers: [EbooksService,CategoryService,LanguageService,UserService,SearchService,{
     provide: HTTP_INTERCEPTORS,
     useClass: MyHttpInterceptor,
     multi: true
