@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
-import { UserPass } from '../model/UserPass';
 import { Router } from '@angular/router';
 import { CategoryService } from '../category.service';
 
