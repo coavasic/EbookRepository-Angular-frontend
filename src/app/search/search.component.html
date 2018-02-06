@@ -43,7 +43,7 @@
       <th>Author</th>
       <th>Year</th>
       <th>Keywords</th>
-      <th *ngIf="!isCategoryFiltered">Category</th>
+      <th>Category</th>
       <th>Langueage</th>
       <th>Download</th>
       <th *ngIf="userLogged">Delete</th>
@@ -55,7 +55,7 @@
         <td>{{ebook.author}}</td>
         <td>{{ebook.publicationYear}}</td>
         <td>{{ebook.keywords}}</td>
-        <td *ngIf="kategorijeStigle && !isCategoryFiltered">{{getCatName(ebook.categoryId)}}</td>
+        <td *ngIf="kategorijeStigle">{{getCatName(ebook.categoryId)}}</td>
         <td *ngIf="jeziciStigli">{{languages[ebook.languageId - 1].languageName}}</td>
         <div *ngIf="isUserAdmin || (myCategoryId==ebook.categoryId || myCategoryId==0); then ifBlock;else elseBlock"></div>
         <ng-template #ifBlock>
