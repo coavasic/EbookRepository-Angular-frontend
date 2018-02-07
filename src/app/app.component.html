@@ -22,7 +22,7 @@
         <a class="nav-link" routerLink="/sign-up">Sign-up</a>
       </li>
       <li *ngIf="isLoggedIn" class="navbar-item">
-        <a class="nav-link">{{currentUsername}}</a>
+        <a class="nav-link" routerLink="/myInfo">{{currentUsername}}</a>
       </li>
       <li *ngIf="isLoggedIn" class="navbar-item">
         <button class="btn btn-danger" (click)="doLogout()">Logout</button>

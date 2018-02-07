@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list/user-list.component';
 import { SearchComponent } from './search/search.component';
 import { SearchService } from './search.service';
+import { UserInfoComponent } from './user-info/user-info.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { SearchService } from './search.service';
     SignUpComponent,
     LoginComponent,
     UserListComponent,
-    SearchComponent
+    SearchComponent,
+    UserInfoComponent
     
   ],
   imports: [

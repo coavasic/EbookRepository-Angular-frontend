@@ -27,4 +27,8 @@ export class CategoryService {
     return this._http.get(this.urlDelete + id);
   }
 
+  getById(id){
+    return this._http.get<Category>("http://localhost:8080/open/categories/"+id);
+  }
+
 }
