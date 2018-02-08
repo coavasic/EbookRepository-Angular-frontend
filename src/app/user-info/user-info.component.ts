@@ -16,6 +16,7 @@ export class UserInfoComponent implements OnInit {
   user: User;
   korisniciStigli = false;
   categoryName="";
+  changePassDivHidden=false;
 
   ngOnInit() {
 
@@ -42,6 +43,22 @@ export class UserInfoComponent implements OnInit {
         this.categoryName="Pristup svim kategorijama";
       }
     )
+  }
+
+  onSubmit(value){
+    this.userService.changePassworD(value).subscribe(
+      success=> {
+        alert("Lozinka uspesno promenjena");
+      },
+      error =>
+      {
+        alert("Lozinke se moraju poklapati");
+      }
+    )
+  }
+
+  changePass(){
+    this.changePassDivHidden=!this.changePassDivHidden;
   }
 
 }

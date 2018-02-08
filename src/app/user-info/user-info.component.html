@@ -6,5 +6,31 @@
     <h2>{{categoryName}}</h2>
   </div>
 
+  <br>
+  <br>
+  <button (click)="changePass()" class="btn btn-success">Change password</button>
+
+  <form *ngIf="changePassDivHidden" #changePass="ngForm" (ngSubmit)="onSubmit(changePass.value)">
+		<div class="form-group">
+			<label for="password">Password:</label>
+			<input type="password" required maxlength="15" minlength="4" name="password" class="form-control" id="password" placeholder="Password" ngModel>
+		</div>
+
+		<div class="form-group">
+			<label for="confirmPassword">Confirm passowrd:</label>
+			<input type="password" required maxlength="15" minlength="4" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm Password"
+			 ngModel>
+		</div>
+
+		<br>
+
+
+		<div class="form-row text-center">
+			<div class="col-6">
+				<button type="submit" [disabled]="!changePass.form.valid" class="btn btn-primary">Change</button>
+			</div>
+			</div>
+	</form>
+
 
 </div>
