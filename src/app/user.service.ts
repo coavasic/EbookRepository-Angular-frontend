@@ -57,4 +57,8 @@ export class UserService {
     return this._http.post("http://localhost:8080/api/user/changePassword",value);
   }
 
+  changeInfo(value){
+    return this._http.post("http://localhost:8080/api/user/changeMyInfo",value);
+  }
+
 }

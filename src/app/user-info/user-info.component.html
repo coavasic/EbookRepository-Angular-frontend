@@ -8,7 +8,17 @@
 
   <br>
   <br>
-  <button (click)="changePass()" class="btn btn-success">Change password</button>
+
+
+  <div class="form-row text-center">
+	<div class="col-6">
+		<button (click)="changePass()" class="btn btn-success">Change password</button>
+	</div>
+	<div class="col-6">
+		<button (click)="changeInfo()" class="btn btn-primary">Change user info</button>
+	</div>
+</div>
+<br>
 
   <form *ngIf="changePassDivHidden" #changePass="ngForm" (ngSubmit)="onSubmit(changePass.value)">
 		<div class="form-group">
@@ -25,10 +35,47 @@
 		<br>
 
 
-		<div class="form-row text-center">
 			<div class="col-6">
 				<button type="submit" [disabled]="!changePass.form.valid" class="btn btn-primary">Change</button>
 			</div>
+	</form>
+
+	<br>
+	<br>
+
+
+	<form *ngIf="changeInfoDivHidden && korisniciStigli" #changeInfo="ngForm" (ngSubmit)="onSubmitInfo(changeInfo.value)">
+		<div class="form-group">
+			<label for="firstName">First name:</label>
+			<input type="text" required name="firstName" class="form-control" id="firstName" placeholder="First name" [ngModel]="user.firstName">
+		</div>
+
+		<div class="form-group">
+			<label for="lastName">Last name:</label>
+			<input type="text" required name="lastName" class="form-control" id="lastName" placeholder="Last name"
+			 [ngModel]="user.lastName">
+		</div>
+
+		<div class="form-group">
+			<label for="username">Username:</label>
+			<input type="text" required name="username" class="form-control" id="username" placeholder="Username"
+			 [ngModel]="user.username">
+		</div>
+
+		<label for="category">Category</label>
+        <select required class="custom-select" name="categoryId" id="category" [ngModel]="user.categoryId">
+          <option value="0" selected>All</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">
+            {{cat.name}}
+          </option>
+        </select>
+
+		<br>
+		<br>
+
+
+			<div class="col-6">
+				<button type="submit" [disabled]="!changeInfo.form.valid && changeInfo.form.changed" class="btn btn-primary">Change</button>
 			</div>
 	</form>
 
