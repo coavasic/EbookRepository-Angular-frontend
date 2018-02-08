@@ -24,8 +24,8 @@
       <th *ngIf="!isCategoryFiltered">Category</th>
       <th>Langueage</th>
       <th>Download</th>
-      <th *ngIf="userLogged">Delete</th>
-      <th *ngIf="userLogged">Edit</th>
+      <th *ngIf="isUserAdmin">Delete</th>
+      <th *ngIf="isUserAdmin">Edit</th>
     </thead>
 
     <tbody *ngFor="let ebook of ebooks">
@@ -47,12 +47,12 @@
             <button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" (click)="goToLogin()">Login to download</button>
           </td>
         </ng-template>
-        <td *ngIf="userLogged">
-          <button [disabled]="!isUserAdmin && !(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="deleteBook(ebook.id)"
+        <td *ngIf="isUserAdmin">
+          <button (click)="deleteBook(ebook.id)"
             style="display: block; text-align: center; margin: auto !important;" class="btn btn-danger">Delete</button>
         </td>
-        <td *ngIf="userLogged">
-          <button [disabled]="!isUserAdmin && !(myCategoryId==ebook.categoryId || myCategoryId==0)" (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;"
+        <td *ngIf="isUserAdmin">
+          <button (click)="goToEBook(ebook.id)" style="display: block; text-align: center; margin: auto !important;"
             class="btn btn-info">Edit</button>
         </td>
       </tr>
