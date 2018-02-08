@@ -1,40 +1,35 @@
 <div class="container" *ngIf="stiglo">
 
   <h2>Edit ebook {{ebookId}}</h2>
-  
+  <form #editEbook="ngForm" (ngSubmit)="ebookUpdate(editEbook.value)">
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
     </div>
-    <input #titleInput type="text" value={{ebook.title}} class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <input #titleInput type="text" name="title" required [ngModel]="ebook.title" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
   </div>
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">Author</span>
     </div>
-    <input type="text" #authorInput value={{ebook.author}} class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <input type="text" name="author" #authorInput [ngModel]="ebook.author" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
   </div>
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">Year</span>
     </div>
-    <input pattern="[0-9]{10}" max="4" type="number" #yearInput value="{{ebook.publicationYear}}" class="form-control" aria-label="Default"
+    <input name="publicationYear" type="text" pattern="^\d{4}$" #yearInput minlength="4" maxlength="4" required [ngModel]="ebook.publicationYear" class="form-control" aria-label="Default"
       aria-describedby="inputGroup-sizing-default">
   </div>
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">Keywords</span>
     </div>
-    <input type="text" #keywordsInput value="{{ebook.keywords}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-  </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Filename</span>
-    </div>
-    <input disabled type="text" #fileNameInput value="{{ebook.fileName}}" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <input type="text" name="keywords" #keywordsInput [ngModel]="keywords" required class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
   </div>
 
-  <button (click)="ebookUpdate(titleInput.value,authorInput.value,yearInput.value,keywordsInput.value,fileNameInput.value)"
-    class="btn btn-success">Upload ebook</button>
+  <button type="submit" [disabled]="!editEbook.form.valid"
+    class="btn btn-success">Update ebook</button>
+  </form>
 
 </div>

@@ -16,13 +16,7 @@ export class EbookComponent implements OnInit {
 
   ebookId;
   ebook: EbookDTO;
-  author: string;
-  title: string;
-  year: number;
-  keywords: string;
-  mime: string;
-  selectedCategoryId;
-  selectedLanguageId;
+
   stiglo = false;
 
   ngOnInit() {
@@ -33,8 +27,6 @@ export class EbookComponent implements OnInit {
       data => {
 
         this.ebook = data;
-        this.selectedCategoryId = data.categoryId;
-        this.selectedLanguageId = data.languageId;
         this.stiglo = true;
 
       }
@@ -42,11 +34,11 @@ export class EbookComponent implements OnInit {
 
   }
 
-  ebookUpdate(title, author, year, keywords,fileName) {
+  ebookUpdate(value) {
 
-    let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
-    console.log(newEbook);
-    this.ebookService.updateEbook(this.ebookId, newEbook).subscribe(
+ //   let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
+  //  console.log(newEbook);
+    this.ebookService.updateEbook(this.ebookId, value).subscribe(
       data => {
 
         this.router.navigate(['/ebooks']);
