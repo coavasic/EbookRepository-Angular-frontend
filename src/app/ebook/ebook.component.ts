@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EbooksService } from '../ebooks.service';
 import { EbookDTO } from '../model/ebookDTO';
+import { PatternValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-ebook',
@@ -35,9 +36,6 @@ export class EbookComponent implements OnInit {
   }
 
   ebookUpdate(value) {
-
- //   let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
-  //  console.log(newEbook);
     this.ebookService.updateEbook(this.ebookId, value).subscribe(
       data => {
 

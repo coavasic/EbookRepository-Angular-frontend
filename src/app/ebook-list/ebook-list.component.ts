@@ -167,9 +167,11 @@ export class EbookListComponent implements OnInit {
     )
   }
 
-  ebookUpload(title, author, year, keywords, fileName) {
-    let newEbook: EbookDTO = { id: "", title: title, author: author, publicationYear: year, keywords: keywords, fileName: fileName, categoryId: this.selectedCategoryId, languageId: this.selectedLanguageId }
-    this.ebookService.postEbook(newEbook).subscribe(
+  ebookUpload(value) {
+    
+    console.log(value);
+
+    this.ebookService.postEbook(value).subscribe(
       data => {
 
         this.isInputDivHidden = false;
@@ -247,7 +249,7 @@ export class EbookListComponent implements OnInit {
   }
 
   deleteBook(id) {
-
+  if(confirm("Are you sure?")){ 
     this.ebookService.deleteEbook(id).subscribe(
       data => {
         if (!this.isCategoryFiltered) {
@@ -259,6 +261,7 @@ export class EbookListComponent implements OnInit {
         }
       }
     )
+  }
   }
 
 
