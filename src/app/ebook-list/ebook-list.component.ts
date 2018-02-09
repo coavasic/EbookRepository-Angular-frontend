@@ -168,7 +168,7 @@ export class EbookListComponent implements OnInit {
   }
 
   ebookUpload(value) {
-    
+
     console.log(value);
 
     this.ebookService.postEbook(value).subscribe(
@@ -249,19 +249,19 @@ export class EbookListComponent implements OnInit {
   }
 
   deleteBook(id) {
-  if(confirm("Are you sure?")){ 
-    this.ebookService.deleteEbook(id).subscribe(
-      data => {
-        if (!this.isCategoryFiltered) {
-          console.log("kurac");
-          this.getEbooks();
-          this.selectedCategoryId = 1;
-        } else {
-          this.getByCategory(this.selectedCategoryId);
+    if (confirm("Are you sure?")) {
+      this.ebookService.deleteEbook(id).subscribe(
+        data => {
+          if (!this.isCategoryFiltered) {
+            console.log("kurac");
+            this.getEbooks();
+            this.selectedCategoryId = 1;
+          } else {
+            this.getByCategory(this.selectedCategoryId);
+          }
         }
-      }
-    )
-  }
+      )
+    }
   }
 
 
@@ -271,5 +271,5 @@ export class EbookListComponent implements OnInit {
     this.router.navigate(['/ebooks', id]);
   }
 
-  
+
 }
