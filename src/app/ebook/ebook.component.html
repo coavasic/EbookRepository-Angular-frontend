@@ -25,7 +25,7 @@
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">Keywords</span>
     </div>
-    <input type="text" name="keywords" #keywordsInput [ngModel]="keywords" required class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    <input type="text" name="keywords" #keywordsInput [ngModel]="ebook.keywords" required class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
   </div>
 
   <button type="submit" [disabled]="!editEbook.form.valid"

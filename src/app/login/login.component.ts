@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter} from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         var token1 = currentUser.token;
         console.log("Token je haha: " + token1);
-
+       
         this.router.navigate(['/ebooks']);
 
 
