@@ -65,7 +65,7 @@
         </ng-template>
         <ng-template #elseBlock>
           <td>
-            <button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" (click)="goToLogin()">Login to download</button>
+            <button style="display: block; text-align: center; margin: auto !important;" class="btn btn-info" routerLink="/login" (click)="goToLogin()">Login to download</button>
           </td>
         </ng-template>
         <td *ngIf="userLogged">
