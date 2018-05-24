@@ -15,7 +15,6 @@ import { UserService } from './user.service';
 import { MyHttpInterceptor } from './my-http-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list/user-list.component';
 import { SearchComponent } from './search/search.component';
@@ -28,7 +27,6 @@ import { UserInfoComponent } from './user-info/user-info.component';
     AppComponent,
     routingComponent,
     SignUpComponent,
-    LoginComponent,
     UserListComponent,
     SearchComponent,
     UserInfoComponent

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { UserService } from './user.service';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-root',
@@ -70,4 +72,32 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/ebooks']);
 
   }
+
+  onSubmitLogin(loginInfo){
+
+      console.log(loginInfo);
+  
+      this.userService.doLogin(loginInfo).subscribe(
+        data => {
+          console.log("OCE");
+          let token = data.headers.get("Authorization")
+          console.log(data.headers.get("Authorization"));
+          localStorage.setItem('currentUser', JSON.stringify({ token: token, name: loginInfo.username }));
+  
+          
+          var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+          var token1 = currentUser.token;
+          console.log("Token je haha: " + token1);
+          $("#loginModal .close").click()
+          this.checkIfUserLoggedIn();
+          this.checkMyRole();
+          this.router.navigate(['/ebooks']);
+  
+  
+        },
+        error => alert("Wrong username or password")
+      )
+  
+    
+   }
 }
