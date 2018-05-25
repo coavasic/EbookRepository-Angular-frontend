@@ -19,6 +19,7 @@ export class EbooksService {
   urlByCat = "http://localhost:8080/open/ebooks/bycategory/"
   urlDelete = "http://localhost:8080/api/ebooks/delete/";
   urlBase = "http://localhost:8080/api/ebooks/";
+  urlReindex = "http://localhost:8080/api/reindex";
 
 
   constructor(private _http: HttpClient) { }
@@ -65,6 +66,10 @@ export class EbooksService {
   
   updateEbook(id, data) {
     return this._http.post(this.urlBase + "update/" + id, data);
+  }
+
+  reindex(){
+    return this._http.get(this.urlReindex);
   }
 
 }

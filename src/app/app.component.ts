@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { UserService } from './user.service';
 import * as $ from 'jquery';
+import { EbooksService } from './ebooks.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import * as $ from 'jquery';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService,private ebookService:EbooksService) { }
 
   isLoggedIn = false;
   isAdmin = false;
@@ -99,5 +100,12 @@ export class AppComponent implements OnInit {
       )
   
     
+   }
+
+   doReindex(){
+      this.ebookService.reindex().subscribe(
+        success => alert("Reindex is successful"),
+        error => alert("Reindex failed")
+      )
    }
 }
