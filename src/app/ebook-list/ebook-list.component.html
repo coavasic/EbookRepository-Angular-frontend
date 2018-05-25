@@ -63,7 +63,7 @@
   <div *ngIf="isUserAdmin" class="form-group">
     <input class="btn btn-primary" type="file" id="file" name="file" accept="application/pdf" (change)="handleFileInput($event.target.files)">
  
-  <button class="btn btn-success" (click)="uploadFileToServer()">Upload</button>
+  &nbsp;&nbsp;<button class="btn btn-success" (click)="uploadFileToServer()">Upload</button>
 </div>
 
   <br>
@@ -87,7 +87,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroup-sizing-default">Year</span>
         </div>
-        <input name="publicationYear" type="text" pattern="^\d{4}$" #yearInput minlength="4" maxlength="4" required [ngModel]="ebook.publicationYear"
+        <input name="publicationYear" type="number"  #yearInput minlength="4" maxlength="4" number required [ngModel]="ebook.publicationYear"
           class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
       </div>
       <div class="input-group mb-3">

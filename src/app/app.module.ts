@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import { EbookListComponent } from './ebook-list/ebook-list.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { UserListComponent } from './user-list/user-list.component';
 import { SearchComponent } from './search/search.component';
 import { SearchService } from './search.service';
+import { CustomFormsModule } from 'ng4-validators';
 import { UserInfoComponent } from './user-info/user-info.component';
 
 
@@ -36,7 +35,9 @@ import { UserInfoComponent } from './user-info/user-info.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    CustomFormsModule 
+
   ],
   providers: [EbooksService,CategoryService,LanguageService,UserService,SearchService,{
     provide: HTTP_INTERCEPTORS,
