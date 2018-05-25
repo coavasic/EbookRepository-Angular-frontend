@@ -23,12 +23,12 @@
   <form *ngIf="changePassDivHidden" #changePass="ngForm" (ngSubmit)="onSubmit(changePass.value)">
 		<div class="form-group">
 			<label for="password">Password:</label>
-			<input type="password" required maxlength="15" minlength="4" name="password" class="form-control" id="password" placeholder="Password" ngModel>
+			<input type="password" required maxlength="15" minlength="4" name="password" #password="ngModel" class="form-control" id="password" placeholder="Password" ngModel>
 		</div>
 
 		<div class="form-group">
 			<label for="confirmPassword">Confirm passowrd:</label>
-			<input type="password" required maxlength="15" minlength="4" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm Password"
+			<input type="password" required maxlength="15" minlength="4" name="confirmPassword" class="form-control" id="confirmPassword" [equalTo]="password" placeholder="Confirm Password"
 			 ngModel>
 		</div>
 
