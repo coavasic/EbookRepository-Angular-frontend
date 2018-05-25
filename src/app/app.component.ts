@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
 
    doReindex(){
       this.ebookService.reindex().subscribe(
-        success => alert("Reindex is successful"),
+        success => alert("Reindex successful"),
         error => alert("Reindex failed")
       )
    }
